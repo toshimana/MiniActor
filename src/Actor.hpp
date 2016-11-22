@@ -93,20 +93,22 @@ private:
 template <typename Message_>
 class Actor : public ActorBase <Message_>
 {
+	using Base = ActorBase<Message_>;
+
 public:
 	Actor( void )
-		: ActorBase()
+		: Base()
 		, th( &Actor<Message_>::exec, this )
 	{
 	}
 
 	virtual ~Actor( void )
 	{
-		if (!halt_flag) halt();
+		if (!Base::halt_flag) halt();
 	}
 
 	void halt() { 
-		to_halt(); 
+		Base::to_halt(); 
 		th.join();
 	}
 
@@ -115,8 +117,8 @@ private:
 
 	void exec( void )
 	{
-		while ( !halt_flag ) {
-			receive();
+		while ( !Base::halt_flag ) {
+			Base::receive();
 			std::this_thread::sleep_for(std::chrono::nanoseconds(1));
 		}
 	}
