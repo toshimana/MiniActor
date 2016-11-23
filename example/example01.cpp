@@ -1,9 +1,9 @@
 #include <iostream>
 #include <string>
 
-#include <Actor.hpp>
+#include <MiniActor.hpp>
 
-struct EchoActor : public Actor<std::string>
+struct EchoActor : public MiniActor::Actor<std::string>
 {
 	void process_message(const Message& msg)
 	{

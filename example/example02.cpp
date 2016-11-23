@@ -1,13 +1,13 @@
 #include <iostream>
 #include <string>
 
-#include <Actor.hpp>
+#include <MiniActor.hpp>
 
 struct CountActor;
 using SpCountActor = std::shared_ptr<CountActor>;
 using WpCountActor = std::weak_ptr<CountActor>;
 
-struct CountActor : public Actor<std::pair<int,WpCountActor> >, std::enable_shared_from_this<CountActor>
+struct CountActor : public MiniActor::Actor<std::pair<int,WpCountActor> >, std::enable_shared_from_this<CountActor>
 {
 	void process_message(const Message& msg)
 	{
